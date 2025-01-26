@@ -4,25 +4,32 @@ const VehicleSchema = new mongoose.Schema(
   {
     brand: {
       type: String,
-      required: true,
+      required: [true, 'La marca es obligatoria'],
+      trim: true, // Remove leading and trailing spaces
     },
     model: {
       type: String,
-      required: true,
+      required: [true, 'El modelo es obligatorio'],
+      trim: true,
     },
     year: {
       type: Number,
-      required: true,
+      required: [true, 'El año es obligatorio'],
+      min: [1886, 'El año debe ser posterior a la invención del automóvil'], // Minimum allowed year
     },
     status: {
       type: String,
-      enum: ['disponible', 'en mantenimiento', 'en servicio'],
+      enum: {
+        values: ['disponible', 'en mantenimiento', 'en servicio'],
+        message:
+          'El estado debe ser: disponible, en mantenimiento o en servicio',
+      },
       default: 'disponible',
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: [true, 'El campo creado por es obligatorio'],
     },
     updatedBy: {
       type: mongoose.Schema.Types.ObjectId,
