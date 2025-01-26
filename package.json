@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "lint": "eslint . && prettier --list-different .",
+    "format": "eslint --fix . && prettier --log-level warn --write ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,5 +16,11 @@
     "mongoose": "^8.9.5",
     "morgan": "~1.9.1",
     "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.21.1",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.7.0",
+    "prettier": "^2.8.4"
   }
 }
